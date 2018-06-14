@@ -57,7 +57,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
 
     final String TAG = "BaseVideoView";
 
-    private int mRenderType = IRender.RENDER_TYPE_TEXTURE_VIEW;
+    private int mRenderType = IRender.RENDER_TYPE_SURFACE_VIEW;
     private AVPlayer mPlayer;
 
     //the container for all play view, contain all covers.
@@ -223,10 +223,12 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
             new OnReceiverEventListener() {
         @Override
         public void onReceiverEvent(int eventCode, Bundle bundle) {
-            if(mEventAssistHandler!=null)
+            if(mEventAssistHandler!=null) {
                 mEventAssistHandler.onAssistHandle(BaseVideoView.this, eventCode, bundle);
-            if(mOnReceiverEventListener!=null)
+            }
+            if(mOnReceiverEventListener!=null) {
                 mOnReceiverEventListener.onReceiverEvent(eventCode, bundle);
+            }
         }
     };
 
@@ -236,8 +238,9 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
 
     @Override
     public void setAspectRatio(AspectRatio aspectRatio) {
-        if(mRender!=null)
+        if(mRender!=null) {
             mRender.updateAspectRatio(aspectRatio);
+        }
     }
 
     @Override

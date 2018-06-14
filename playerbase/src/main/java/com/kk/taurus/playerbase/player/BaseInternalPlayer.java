@@ -54,13 +54,15 @@ public abstract class BaseInternalPlayer implements IPlayer {
     }
 
     protected final void submitPlayerEvent(int eventCode, Bundle bundle){
-        if(mOnPlayerEventListener!=null)
+        if(mOnPlayerEventListener!=null) {
             mOnPlayerEventListener.onPlayerEvent(eventCode, bundle);
+        }
     }
 
     protected final void submitErrorEvent(int eventCode, Bundle bundle){
-        if(mOnErrorEventListener!=null)
+        if(mOnErrorEventListener!=null) {
             mOnErrorEventListener.onErrorEvent(eventCode, bundle);
+        }
     }
 
     protected final void updateStatus(int status){

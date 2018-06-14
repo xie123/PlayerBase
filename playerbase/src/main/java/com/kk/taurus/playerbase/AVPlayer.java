@@ -368,14 +368,16 @@ public final class AVPlayer implements IPlayer{
 
     @Override
     public void setVolume(float left, float right) {
-        if(isPlayerAvailable())
+        if(isPlayerAvailable()) {
             mInternalPlayer.setVolume(left, right);
+        }
     }
 
     @Override
     public void setSpeed(float speed) {
-        if(isPlayerAvailable())
+        if(isPlayerAvailable()) {
             mInternalPlayer.setSpeed(speed);
+        }
     }
 
     @Override
@@ -387,8 +389,9 @@ public final class AVPlayer implements IPlayer{
 
     @Override
     public int getCurrentPosition() {
-        if(isPlayerAvailable())
+        if(isPlayerAvailable()) {
             return mInternalPlayer.getCurrentPosition();
+        }
         return 0;
     }
 

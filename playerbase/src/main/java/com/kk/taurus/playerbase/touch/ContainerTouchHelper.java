@@ -20,26 +20,26 @@ import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.kk.taurus.playerbase.touch.BaseGestureCallbackHandler;
-
 /**
  * Created by Taurus on 2017/11/20.
  */
 
-public class ContainerTouchHelper{
+public class ContainerTouchHelper {
 
     private GestureDetector mGestureDetector;
     private BaseGestureCallbackHandler mGestureCallback;
 
-    public ContainerTouchHelper(Context context, BaseGestureCallbackHandler gestureCallback){
+    public ContainerTouchHelper(Context context, BaseGestureCallbackHandler gestureCallback) {
         this.mGestureCallback = gestureCallback;
-        mGestureDetector = new GestureDetector(context,gestureCallback);
+        mGestureDetector = new GestureDetector(context, gestureCallback);
     }
 
-    public boolean onTouch(MotionEvent event){
-        switch (event.getAction()){
+    public boolean onTouch(MotionEvent event) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
                 onEndGesture(event);
+                break;
+            default:
                 break;
         }
         return mGestureDetector.onTouchEvent(event);

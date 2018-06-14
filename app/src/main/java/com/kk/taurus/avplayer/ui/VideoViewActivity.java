@@ -71,7 +71,7 @@ public class VideoViewActivity extends AppCompatActivity implements OnPlayerEven
 
         setContentView(R.layout.activity_video_view);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -92,6 +92,7 @@ public class VideoViewActivity extends AppCompatActivity implements OnPlayerEven
                 )
                 .request();
 
+
         mMusicWave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,13 +107,12 @@ public class VideoViewActivity extends AppCompatActivity implements OnPlayerEven
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
         PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @PermissionSuccess(requestCode = 101)
-    public void permissionSuccess() {
+        public void permissionSuccess() {
         permissionSuccess = true;
         initPlay();
     }
@@ -351,11 +351,13 @@ public class VideoViewActivity extends AppCompatActivity implements OnPlayerEven
         mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         mVisualizer.setDataCaptureListener(
                 new Visualizer.OnDataCaptureListener() {
+                    @Override
                     public void onWaveFormDataCapture(Visualizer visualizer,
                                                       byte[] bytes, int samplingRate) {
                         mMusicWave.updateVisualizer(bytes);
                     }
 
+                    @Override
                     public void onFftDataCapture(Visualizer visualizer,
                                                  byte[] bytes, int samplingRate) {
                     }

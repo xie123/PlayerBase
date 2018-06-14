@@ -60,7 +60,7 @@ public class DataUtils {
         videoList.add(new VideoBean(
                 "你欠缺的也许并不是能力",
                 "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg",
-                "https://mov.bn.netease.com/open-movie/nos/mp4/2016/06/22/SBP8G92E3_hd.mp4"));
+                "http://122.193.13.66:5001/nn_live/nn_x64/aWQ9Q0NUVjUtSEQtMk0mbm5fYWs9MDE5MzVkMzYzOTQwYTBhMTVlZGI1NWU0ZDdlYjM2ZjM1YiZudHRsPTMmbnBpcHM9MTcyLjE2LjE4My4xMDM6NTEwMCZuY21zaWQ9MTAwMDAxJm5ncz01YWIyMjViMzAwMDQ0ZjA0NDNjMTEwYWExODM5YzM1MyZuZnQ9aGxzJm5uX3VzZXJfaWQ9Jm5kaT0mbmR2PSZuZm09JnNjaGVkdWxlX2luZm89MCZuc3Q9aXB0diZuZHQ9c3RiJm5uX2NvcmVfdGVzdD1jb3JlX2FkbWlu/CCTV5-HD-2M.m3u8"));
 
         videoList.add(new VideoBean(
                 "坚持与放弃",

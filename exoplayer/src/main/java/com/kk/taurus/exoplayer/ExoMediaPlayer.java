@@ -388,6 +388,11 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
         }
 
         @Override
+        public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+        }
+
+        @Override
         public void onPlayerError(ExoPlaybackException error) {
             PLog.e(TAG,error.getMessage());
             int type = error.type;
@@ -405,13 +410,19 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
         }
 
         @Override
-        public void onPositionDiscontinuity() {
+        public void onPositionDiscontinuity(int reason) {
 
         }
+
 
         @Override
         public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
             PLog.d(TAG,"onPlaybackParametersChanged : " + playbackParameters.toString());
+        }
+
+        @Override
+        public void onSeekProcessed() {
+
         }
     };
 

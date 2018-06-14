@@ -28,16 +28,18 @@ public class StateGetterImpl implements StateGetter {
 
     private boolean isBuffering;
 
-    public void proxyPlayerEvent(int eventCode, Bundle bundle){
-        switch (eventCode){
+    public void proxyPlayerEvent(int eventCode, Bundle bundle) {
+        switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_STATUS_CHANGE:
-                mState = bundle==null?IPlayer.STATE_IDLE:bundle.getInt(EventKey.INT_DATA);
+                mState = bundle == null ? IPlayer.STATE_IDLE : bundle.getInt(EventKey.INT_DATA);
                 break;
             case OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_START:
                 isBuffering = true;
                 break;
             case OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END:
                 isBuffering = false;
+                break;
+            default:
                 break;
         }
     }
@@ -49,14 +51,15 @@ public class StateGetterImpl implements StateGetter {
 
     private PlayerStateGetter mInternalPlayerStateGetter =
             new PlayerStateGetter() {
-        @Override
-        public int getState() {
-            return mState;
-        }
-        @Override
-        public boolean isBuffering() {
-            return isBuffering;
-        }
-    };
+                @Override
+                public int getState() {
+                    return mState;
+                }
+
+                @Override
+                public boolean isBuffering() {
+                    return isBuffering;
+                }
+            };
 
 }

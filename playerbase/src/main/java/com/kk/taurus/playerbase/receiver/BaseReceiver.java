@@ -42,16 +42,16 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
      * Use it carefully to avoid memory leaks
      *
      * @param context
-     *
      */
-    public BaseReceiver(Context context){
+    public BaseReceiver(Context context) {
         this.mContext = context;
     }
 
     /**
      * When the receiver is added to the group, callback this method.
      */
-    public void onReceiverBind(){
+    @Override
+    public void onReceiverBind() {
 
     }
 
@@ -74,7 +74,7 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
         this.mHostGroup = receiverGroup;
     }
 
-    protected final GroupValue getGroupValue(){
+    protected final GroupValue getGroupValue() {
         return mHostGroup.getGroupValue();
     }
 
@@ -86,7 +86,7 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
     @Override
     @Nullable
     public final PlayerStateGetter getPlayerStateGetter() {
-        if(mStateGetter!=null)
+        if (mStateGetter != null)
             return mStateGetter.getPlayerStateGetter();
         return null;
     }
@@ -104,32 +104,33 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
 
     /**
      * A receiver sends an event, and the receiver in the same group can receive the event.
+     *
      * @param eventCode
      * @param bundle
      */
-    protected final void notifyReceiverEvent(int eventCode, Bundle bundle){
-        if(mOnReceiverEventListener!=null)
+    protected final void notifyReceiverEvent(int eventCode, Bundle bundle) {
+        if (mOnReceiverEventListener != null) {
             mOnReceiverEventListener.onReceiverEvent(eventCode, bundle);
+        }
     }
 
     /**
      * Send an event to the specified receiver,
      * make sure that the key value you imported is correct.
      *
-     * @param key The unique value of a receiver can be found.
+     * @param key       The unique value of a receiver can be found.
      * @param eventCode
      * @param bundle
-     *
      * @return Bundle Return value after the receiver's response, nullable.
-     *
      */
-    protected final @Nullable Bundle notifyReceiverPrivateEvent(
-            @NonNull String key, int eventCode, Bundle bundle){
-        if(mHostGroup!=null && !TextUtils.isEmpty(key)){
+    protected final @Nullable
+    Bundle notifyReceiverPrivateEvent(
+            @NonNull String key, int eventCode, Bundle bundle) {
+        if (mHostGroup != null && !TextUtils.isEmpty(key)) {
             IReceiver receiver = mHostGroup.getReceiver(key);
-            if(receiver!=null){
+            if (receiver != null) {
                 return receiver.onPrivateEvent(eventCode, bundle);
-            }else{
+            } else {
                 PLog.e("BaseReceiver",
                         "not found receiver use you incoming key.");
             }
@@ -142,12 +143,12 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
         return null;
     }
 
-    protected final Context getContext(){
+    protected final Context getContext() {
         return mContext;
     }
 
     //default tag is class simple name
-    public Object getTag(){
+    public Object getTag() {
         return this.getClass().getSimpleName();
     }
 

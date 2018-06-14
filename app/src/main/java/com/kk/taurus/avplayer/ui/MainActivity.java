@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnReceiverEventLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.switchIjkPlayer:
                 PlayerConfig.setDefaultPlanId(App.PLAN_ID_IJK);
                 updateDecoderInfo();
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnReceiverEventLi
             case R.id.switchExoPlayer:
                 PlayerConfig.setDefaultPlanId(App.PLAN_ID_EXO);
                 updateDecoderInfo();
+                break;
+            default:
                 break;
         }
         return true;
@@ -70,27 +72,27 @@ public class MainActivity extends AppCompatActivity implements OnReceiverEventLi
         mInfo.setText("当前解码方案为:" + defaultPlan.getDesc());
     }
 
-    public void useBaseVideoView(View v){
+    public void useBaseVideoView(View v) {
         intentTo(VideoViewActivity.class);
     }
 
-    public void useWindowSwitchPlay(View v){
+    public void useWindowSwitchPlay(View v) {
         intentTo(WindowSwitchPlayActivity.class);
     }
 
-    public void useWindowVideoView(View v){
+    public void useWindowVideoView(View v) {
         intentTo(WindowVideoViewActivity.class);
     }
 
-    public void useAVPlayerLocalVideos(View v){
+    public void useAVPlayerLocalVideos(View v) {
         intentTo(LocalVideoListActivity.class);
     }
 
-    public void useAVPlayerOnlineVideos(View v){
+    public void useAVPlayerOnlineVideos(View v) {
         intentTo(OnlineVideoListActivity.class);
     }
 
-    private void intentTo(Class<? extends Activity> cls){
+    private void intentTo(Class<? extends Activity> cls) {
         Intent intent = new Intent(getApplicationContext(), cls);
         startActivity(intent);
     }
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements OnReceiverEventLi
 
     @Override
     public void onReceiverEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
 
         }
     }

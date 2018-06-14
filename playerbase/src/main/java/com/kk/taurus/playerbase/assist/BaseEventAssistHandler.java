@@ -20,13 +20,14 @@ import android.os.Bundle;
 
 /**
  * Created by Taurus on 2018/5/21.
+ *
  * @param <T>
  */
 public abstract class BaseEventAssistHandler<T> implements OnEventAssistHandler<T> {
 
     @Override
     public void onAssistHandle(T assist, int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case InterEvent.CODE_REQUEST_PAUSE:
                 requestPause(assist, bundle);
                 break;
@@ -47,6 +48,8 @@ public abstract class BaseEventAssistHandler<T> implements OnEventAssistHandler<
                 break;
             case InterEvent.CODE_REQUEST_REPLAY:
                 requestReplay(assist, bundle);
+                break;
+            default:
                 break;
         }
     }

@@ -31,7 +31,7 @@ public class AssistPlayer {
 
     private DataSource mDataSource;
 
-    private AssistPlayer(){
+    private AssistPlayer() {
         mAppContext = App.get().getApplicationContext();
         mRelationAssist = new RelationAssist(mAppContext);
         mRelationAssist.setEventAssistHandler(mInternalEventAssistHandler);
@@ -41,10 +41,10 @@ public class AssistPlayer {
         mOnReceiverEventListeners = new ArrayList<>();
     }
 
-    public static AssistPlayer get(){
-        if(null==i){
-            synchronized (AssistPlayer.class){
-                if(null==i){
+    public static AssistPlayer get() {
+        if (null == i) {
+            synchronized (AssistPlayer.class) {
+                if (null == i) {
                     i = new AssistPlayer();
                 }
             }
@@ -57,101 +57,103 @@ public class AssistPlayer {
     private List<OnReceiverEventListener> mOnReceiverEventListeners;
 
     public void addOnPlayerEventListener(OnPlayerEventListener onPlayerEventListener) {
-        if(mOnPlayerEventListeners.contains(onPlayerEventListener))
+        if (mOnPlayerEventListeners.contains(onPlayerEventListener))
             return;
         mOnPlayerEventListeners.add(onPlayerEventListener);
     }
 
-    public boolean removePlayerEventListener(OnPlayerEventListener onPlayerEventListener){
+    public boolean removePlayerEventListener(OnPlayerEventListener onPlayerEventListener) {
         return mOnPlayerEventListeners.remove(onPlayerEventListener);
     }
 
     public void addOnErrorEventListener(OnErrorEventListener onErrorEventListener) {
-        if(mOnErrorEventListeners.contains(onErrorEventListener))
+        if (mOnErrorEventListeners.contains(onErrorEventListener))
             return;
         mOnErrorEventListeners.add(onErrorEventListener);
     }
 
-    public boolean removeErrorEventListener(OnErrorEventListener onErrorEventListener){
+    public boolean removeErrorEventListener(OnErrorEventListener onErrorEventListener) {
         return mOnErrorEventListeners.remove(onErrorEventListener);
     }
 
-    public void addOnReceiverEventListener(OnReceiverEventListener onReceiverEventListener){
-        if(mOnReceiverEventListeners.contains(onReceiverEventListener))
+    public void addOnReceiverEventListener(OnReceiverEventListener onReceiverEventListener) {
+        if (mOnReceiverEventListeners.contains(onReceiverEventListener))
             return;
         mOnReceiverEventListeners.add(onReceiverEventListener);
     }
 
-    public boolean removeReceiverEventListener(OnReceiverEventListener onReceiverEventListener){
+    public boolean removeReceiverEventListener(OnReceiverEventListener onReceiverEventListener) {
         return mOnReceiverEventListeners.remove(onReceiverEventListener);
     }
 
     private OnPlayerEventListener mInternalPlayerEventListener =
             new OnPlayerEventListener() {
-        @Override
-        public void onPlayerEvent(int eventCode, Bundle bundle) {
-            callBackPlayerEventListeners(eventCode, bundle);
-        }
-    };
+                @Override
+                public void onPlayerEvent(int eventCode, Bundle bundle) {
+                    callBackPlayerEventListeners(eventCode, bundle);
+                }
+            };
 
     private void callBackPlayerEventListeners(int eventCode, Bundle bundle) {
-        for(OnPlayerEventListener listener:mOnPlayerEventListeners){
+        for (OnPlayerEventListener listener : mOnPlayerEventListeners) {
             listener.onPlayerEvent(eventCode, bundle);
         }
     }
 
     private OnErrorEventListener mInternalErrorEventListener =
             new OnErrorEventListener() {
-        @Override
-        public void onErrorEvent(int eventCode, Bundle bundle) {
-            callBackErrorEventListeners(eventCode, bundle);
-        }
-    };
+                @Override
+                public void onErrorEvent(int eventCode, Bundle bundle) {
+                    callBackErrorEventListeners(eventCode, bundle);
+                }
+            };
 
     private void callBackErrorEventListeners(int eventCode, Bundle bundle) {
-        for(OnErrorEventListener listener:mOnErrorEventListeners){
+        for (OnErrorEventListener listener : mOnErrorEventListeners) {
             listener.onErrorEvent(eventCode, bundle);
         }
     }
 
     private OnReceiverEventListener mInternalReceiverEventListener =
             new OnReceiverEventListener() {
-        @Override
-        public void onReceiverEvent(int eventCode, Bundle bundle) {
-            callBackReceiverEventListeners(eventCode, bundle);
-        }
-    };
+                @Override
+                public void onReceiverEvent(int eventCode, Bundle bundle) {
+                    callBackReceiverEventListeners(eventCode, bundle);
+                }
+            };
 
     private OnAssistPlayEventHandler mInternalEventAssistHandler =
-            new OnAssistPlayEventHandler(){
-        @Override
-        public void onAssistHandle(AssistPlay assistPlay, int eventCode, Bundle bundle) {
-            super.onAssistHandle(assistPlay, eventCode, bundle);
-            switch (eventCode){
-                case DataInter.Event.EVENT_CODE_ERROR_SHOW:
-                    reset();
-                    break;
-            }
-        }
-    };
+            new OnAssistPlayEventHandler() {
+                @Override
+                public void onAssistHandle(AssistPlay assistPlay, int eventCode, Bundle bundle) {
+                    super.onAssistHandle(assistPlay, eventCode, bundle);
+                    switch (eventCode) {
+                        case DataInter.Event.EVENT_CODE_ERROR_SHOW:
+                            reset();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
 
     private void callBackReceiverEventListeners(int eventCode, Bundle bundle) {
-        for(OnReceiverEventListener listener:mOnReceiverEventListeners){
+        for (OnReceiverEventListener listener : mOnReceiverEventListeners) {
             listener.onReceiverEvent(eventCode, bundle);
         }
     }
 
-    private void attachListener(){
+    private void attachListener() {
         mRelationAssist.setOnPlayerEventListener(mInternalPlayerEventListener);
         mRelationAssist.setOnErrorEventListener(mInternalErrorEventListener);
         mRelationAssist.setOnReceiverEventListener(mInternalReceiverEventListener);
     }
 
-    public void setReceiverGroup(ReceiverGroup receiverGroup){
+    public void setReceiverGroup(ReceiverGroup receiverGroup) {
         mRelationAssist.setReceiverGroup(receiverGroup);
     }
 
-    public ReceiverGroup getReceiverGroup(){
+    public ReceiverGroup getReceiverGroup() {
         return mRelationAssist.getReceiverGroup();
     }
 
@@ -159,34 +161,34 @@ public class AssistPlayer {
         return mDataSource;
     }
 
-    public void play(ViewGroup userContainer, DataSource dataSource){
-        if(dataSource!=null){
+    public void play(ViewGroup userContainer, DataSource dataSource) {
+        if (dataSource != null) {
             this.mDataSource = dataSource;
         }
         attachListener();
         mRelationAssist.attachContainer(userContainer);
-        if(dataSource!=null)
+        if (dataSource != null)
             mRelationAssist.setDataSource(dataSource);
         ReceiverGroup receiverGroup = getReceiverGroup();
-        if(receiverGroup!=null
-                && receiverGroup.getGroupValue().getBoolean(DataInter.Key.KEY_ERROR_SHOW)){
+        if (receiverGroup != null
+                && receiverGroup.getGroupValue().getBoolean(DataInter.Key.KEY_ERROR_SHOW)) {
             return;
         }
         mRelationAssist.play();
     }
 
-    public void setDataProvider(IDataProvider dataProvider){
+    public void setDataProvider(IDataProvider dataProvider) {
         mRelationAssist.setDataProvider(dataProvider);
     }
 
-    public boolean isInPlaybackState(){
+    public boolean isInPlaybackState() {
         int state = getState();
-        PLog.d("AssistPlayer","isInPlaybackState : state = " + state);
-        return state!= IPlayer.STATE_END
-                && state!= IPlayer.STATE_ERROR
-                && state!= IPlayer.STATE_IDLE
-                && state!= IPlayer.STATE_INITIALIZED
-                && state!= IPlayer.STATE_STOPPED;
+        PLog.d("AssistPlayer", "isInPlaybackState : state = " + state);
+        return state != IPlayer.STATE_END
+                && state != IPlayer.STATE_ERROR
+                && state != IPlayer.STATE_IDLE
+                && state != IPlayer.STATE_INITIALIZED
+                && state != IPlayer.STATE_STOPPED;
     }
 
     public boolean isPlaying() {
